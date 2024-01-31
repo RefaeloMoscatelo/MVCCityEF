@@ -27,7 +27,8 @@ namespace MVCCityEF.Controllers
             context.tbl_cities.Add(city);
             context.SaveChanges();
             ViewBag.Message = "City Added successfully";
-            return View();
+            return RedirectToAction("Index");
+         
         }
         [HttpGet]
         public ActionResult Edit(int id)

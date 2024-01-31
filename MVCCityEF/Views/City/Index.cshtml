@@ -1,21 +1,24 @@
 ﻿@model IEnumerable<MVCCityEF.tbl_cities>
 
 @{
-//ViewBag.Title = "Index";
+    //ViewBag.Title = "Index";
 }
+
+
+  
 
 <h2>Cities</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table id="tbl" class="table">
-    <thead>
-        <tr>
-            <th>
+<table id="tbl" class="table table-striped table-bordered">
+    <thead >
+        <tr >
+            <th style="background-color:#4d4d4d;color:white;">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th  class="no-sort"></th>
+            <th style="background-color:#4d4d4d;color:white;" class="no-sort"></th>
         </tr>
     </thead>
     <tbody>
@@ -29,27 +32,59 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id },
-                    new { onclick = "return confirm('Are you sure you wish to delete this city?');" }) 
+                    new { onclick = "return confirm('Are you sure you wish to delete this city?');" })
                 </td>
             </tr>
 
         }
     </tbody>
-    </table>
+</table>
 
 @section Scripts
 {
-<script>
-    $(document).ready(function () {
-        $("#tbl").DataTable({
-            "iDisplayLength": 5,
-            "lengthChange": false,
-            "ordering": true,
-            columnDefs: [{
-                orderable: false,
-                targets: "no-sort"
-            }]
+    <script>
+
+
+
+        $(document).ready(function () {
+            var table = $('#tbl').DataTable();
+
+            //var target = document.body;
+            //var observer = new MutationObserver(function () {
+            //    $('input[type="search"]').keyup(function (e) {
+            //        if (e.keyCode == 90) {
+            //            console.log(e.keyCode);
+            //            e.preventDefault();
+            //            $(this).append('b').focus();
+            //        }
+            //        if (e.keyCode == 89) {
+            //            console.log(e.keyCode);
+            //            e.preventDefault();
+            //            $(this).append('z').focus();
+            //        }
+
+            //    });
+            //});
+
+            // configuration of the observer:
+            var config = { childList: true, subtree: true };
+
+            // pass in the target node, as well as the observer options
+            observer.observe(target, config);
+            $("#tbl").DataTable({
+                "iDisplayLength": 5,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json',
+                },
+               
+                "lengthChange": false,
+                "ordering": true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: "no-sort"
+                }]
+            });
         });
-    });
- </script>    
+
+    </script>
 }
